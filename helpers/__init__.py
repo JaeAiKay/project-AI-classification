@@ -27,7 +27,7 @@ def get_data():
       if col == 'outcome Class':
           Y = df[col].cat.codes.values
       elif str(df[col].dtype) != 'category':
-          X[col] = {'data': df[col].fillna(df[col].mean()).values, 'type': 'category'}
+          df[col] = df[col].fillna(df[col].mean()).values
       else:
-          X[col] = {'data': df[col].cat.codes.values, 'type': 'number'}
-  return X, Y
+          df[col] = df[col].cat.codes.values
+  return df.drop(columns='outcome Class'), Y
