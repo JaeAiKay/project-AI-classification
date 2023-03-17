@@ -23,11 +23,13 @@ def get_data():
 
   X = dict()
   Y = None
+  Y_class_labels = []
   for col in df:
       if col == 'outcome Class':
           Y = df[col].cat.codes.values
+          Y_class_labels = df[col].cat.categories
       elif str(df[col].dtype) != 'category':
           df[col] = df[col].fillna(df[col].mean()).values
       else:
           df[col] = df[col].cat.codes.values
-  return df.drop(columns='outcome Class'), Y
+  return df.drop(columns='outcome Class'), Y, Y_class_labels.tolist()
